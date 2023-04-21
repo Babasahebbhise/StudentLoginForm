@@ -1,0 +1,107 @@
+﻿@model KiranAssesment.Models.Student
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="~/css/StudentForm.css asp-append-version="true" />
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<hr />
+
+<div class="row">
+    <center style="border:solid;background-color:chartreuse">
+        <h1>Student Details Form</h1>
+    <div class="col-md-4" >
+       
+        <form >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div id="StudentName" class="form-group">
+                <label asp-for="StudentName" class="control-label"></label>
+                <input id="studentname" class="form-control" />
+                <span asp-validation-for="StudentName" class="text-danger"></span>
+            </div>
+                <div id="StudentEmail" class="form-group" style="margin-top:20px">
+                <label asp-for="Email" class="control-label"></label>
+                <input id ="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+                <div id="StudentDOB" class="form-group" style="margin-top:20px">
+                <label asp-for="DateOfBirth" class="control-label"></label>
+                <input id="dateofbirth" type="date" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-top:20px">
+                <label asp-for="Gender" class="control-label"></label>
+
+                Male
+                <input id="gender" name="Gender" value="Male" type="radio"/>
+                Female
+                <input id="gender" name="Gender" value="Female" type="radio"/>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+                <div class="form-group" style="margin-top:20px">
+                <label asp-for="Language" class="control-label"></label>
+                <select id="language">
+                   <option value="Marathi">Marathi</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English">English</option>
+               </select>
+                <span asp-validation-for="Language" class="text-danger"></span>
+            </div>
+
+                <div class="form-group" style="margin-top:20px">
+                <button type="button" onclick="addStudent()">Create-Student</button> 
+                <button type="reset">Clear</button>
+            </div>
+        </form>
+        <div>
+            <p id="printname"></p><br />
+            <p id="printemail"></p><br />
+            <p id="printdateofbirth"></p><br />
+            <p id="printgender"></p><br />
+            <p id="printlanguage"></p><br />
+        </div>
+    </div>
+    </center>
+</div>
+
+
+<script>
+    function addStudent() {
+
+        let student = {
+
+            StudentName: $("#studentname").val(),
+
+            Email: $("#email").val(),
+
+            DateOfBirth: $("#dateofbirth").val(),
+            
+            Gender : $("#gender").val(),
+
+            Language: $("#language").val()
+         
+
+        };
+        console.log(student);
+
+
+        $("#printname").html(student.StudentName);
+        $("#printemail").html(student.Email);
+        $("#printdateofbirth").html(student.DateOfBirth);
+        $("#printgender").html(student.Gender);
+        $("#printlanguage").html(student.Language);
+      
+
+
+        let promise1 = axios.post("/Home/StudentForm", student);
+        promise1.then((response) => {
+            const result = response.data;
+            if (result != null) {
+                console.log("okok");
+
+            }
+        });
+       
+    }
+</script>
+
+
