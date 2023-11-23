@@ -26,5 +26,10 @@ namespace KiranAssesment.Models
         {
             return ("Name" + StudentName + " " + "DOB" + DateOfBirth + " " + "Email" + Email + " " + "Gender" + Gender + " " + "Language" + Language);
         }
+		
+		//public override string ToString()
+       // {
+           // return ("Name" + StudentName + " " + "DOB" + DateOfBirth + " " + "Email" + Email + " " + "Gender" + Gender + " " + "Language" + Language);
+        //}
     }
 }
